@@ -28,5 +28,7 @@ public interface AddressRepository extends MongoRepository<Address, String> {
 
     Optional<Address> findByContactIdAndEmail(Long contactId, String email);
 
-//    List<Address> findByContactName(String contactName);
+    List<Address> findByContactName(String contactName);
+
+    public void deleteByContactId(Long contactId);
 }

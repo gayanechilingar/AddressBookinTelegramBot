@@ -61,7 +61,32 @@ public class AddressService {
 
     }
 
-//          public List<Address> findByContactName(String contactName) {
-//        return addressRepository.findByContactName(contactName);
-//    }
+
+    
+    
+    public Optional<Address> updateZoomId(Long contactId, int zoomId) {
+
+        Optional<Address> updateZoomId = this.findByContactId(contactId);
+
+        if (!updateZoomId.isPresent()) {
+            log.error("We can't update email, because you don't have chat");
+            return Optional.empty();
+        }
+
+        Address existingAddress = updateZoomId.get();
+        existingAddress.setZoomId(zoomId);
+        Address updatedZoomId1 = addressRepository.save(existingAddress);
+        return Optional.of(updatedZoomId1);
+
+    }
+    
+    
+    public void delete(Long contactId) {
+        addressRepository.deleteByContactId(contactId);
+    }
+    
+    
+    public List<Address> findByContactName(String contactName) {
+        return addressRepository.findByContactName(contactName);
+    }
 }
